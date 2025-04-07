@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-    <!-- Base Ontology -->
-    <uri name="http://example.org/software-architecture-ontology" uri="ontology_core.ttl"/>
-    <uri name="http://example.org/software-architecture-ontology/" uri="ontology_core.ttl"/> <!-- Common variation -->
 
-    <!-- Module Ontologies -->
+    <!-- Map the main ontology URI (with and without fragment) -->
+    <uri name="http://example.org/software-architecture-ontology#" uri="ontology_core.ttl"/>
+    <uri name="http://example.org/software-architecture-ontology" uri="ontology_core.ttl"/>
+
+    <!-- Map imported module URIs to relative local files -->
     <uri name="http://example.org/software-architecture-ontology/technologies" uri="ontology_technologies.ttl"/>
     <uri name="http://example.org/software-architecture-ontology/problems" uri="ontology_problems.ttl"/>
     <uri name="http://example.org/software-architecture-ontology/solutions" uri="ontology_solutions.ttl"/>
     <uri name="http://example.org/software-architecture-ontology/context" uri="ontology_context.ttl"/>
     <uri name="http://example.org/software-architecture-ontology/datasources" uri="ontology_datasources.ttl"/>
     <uri name="http://example.org/software-architecture-ontology/architecture" uri="ontology_architecture.ttl"/>
-    <uri name="http://example.org/software-architecture-ontology/object-properties" uri="ontology_object_properties.ttl"/>
-    <uri name="http://example.org/software-architecture-ontology/datatype-properties" uri="ontology_datatype_properties.ttl"/>
-
-    <!-- Individual Modules -->
+    <uri name="http://example.org/software-architecture-ontology/object_properties" uri="ontology_object_properties.ttl"/>
+    <uri name="http://example.org/software-architecture-ontology/datatype_properties" uri="ontology_datatype_properties.ttl"/>
     <uri name="http://example.org/software-architecture-ontology/individuals/languages" uri="ontology_individuals_languages.ttl"/>
     <uri name="http://example.org/software-architecture-ontology/individuals/platforms" uri="ontology_individuals_platforms.ttl"/>
     <uri name="http://example.org/software-architecture-ontology/individuals/databases" uri="ontology_individuals_databases.ttl"/>
-    <uri name="http://example.org/software-architecture-ontology/individuals/devops-tools" uri="ontology_individuals_devops_tools.ttl"/>
-    <uri name="http://example.org/software-architecture-ontology/individuals/frameworks-libs-misc" uri="ontology_individuals_frameworks_libs_misc.ttl"/>
+    <uri name="http://example.org/software-architecture-ontology/individuals_devops_tools" uri="ontology_individuals_devops_tools.ttl"/>
+    <uri name="http://example.org/software-architecture-ontology/individuals_frameworks_libs_misc" uri="ontology_individuals_frameworks_libs_misc.ttl"/>
 
-    <!-- Group for easier loading if needed -->
-    <group id="Folder Repository, directory=, recursive=false, Auto-Update=true, version=2" prefer="public" xml:base=""/>
 </catalog>

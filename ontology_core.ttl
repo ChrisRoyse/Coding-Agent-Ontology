@@ -6,6 +6,20 @@
 
 <http://example.org/software-architecture-ontology>
     rdf:type owl:Ontology ;
+    owl:versionIRI <http://example.org/software-architecture-ontology/1.0.0> ;
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ;
+    owl:imports <http://example.org/software-architecture-ontology/problems> ;
+    owl:imports <http://example.org/software-architecture-ontology/solutions> ;
+    owl:imports <http://example.org/software-architecture-ontology/context> ;
+    owl:imports <http://example.org/software-architecture-ontology/datasources> ;
+    owl:imports <http://example.org/software-architecture-ontology/architecture> ;
+    owl:imports <http://example.org/software-architecture-ontology/object_properties> ;
+    owl:imports <http://example.org/software-architecture-ontology/datatype_properties> ;
+    owl:imports <http://example.org/software-architecture-ontology/individuals/languages> ;
+    owl:imports <http://example.org/software-architecture-ontology/individuals/platforms> ;
+    owl:imports <http://example.org/software-architecture-ontology/individuals/databases> ;
+    owl:imports <http://example.org/software-architecture-ontology/individuals_devops_tools> ;
+    owl:imports <http://example.org/software-architecture-ontology/individuals_frameworks_libs_misc> ;
     rdfs:label "Software Architecture Problem Prediction Ontology - Core" ;
     rdfs:comment "The core module defining top-level abstract classes for the ontology." .
 
