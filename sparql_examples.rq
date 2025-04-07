@@ -1,0 +1,144 @@
+# SPARQL Example Queries for the Software Architecture Ontology
+# Note: These queries assume the ontology is populated with instance data.
+
+PREFIX : <http://example.org/software-architecture-ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# CQ1: What programming languages are defined in the ontology?
+SELECT ?language ?label WHERE {
+  ?language rdf:type :ProgrammingLanguage .
+  ?language rdfs:label ?label .
+}
+ORDER BY ?label
+
+# CQ2: List all defined frameworks.
+SELECT ?framework ?label WHERE {
+  ?framework rdf:type :Framework .
+  ?framework rdfs:label ?label .
+}
+ORDER BY ?label
+
+# CQ3: What is the homepage for the technology 'React'?
+SELECT ?homepage WHERE {
+  :React :hasHomepage ?homepage .
+}
+
+# CQ4: What versions of 'Python' are known? (Requires TechnologyVersion instances)
+# Example: Assuming :Python3.9.1 rdf:type :TechnologyVersion ; :instanceOf :Python .
+SELECT ?version ?versionString WHERE {
+  ?version :instanceOf :Python ;
+           rdf:type :TechnologyVersion ;
+           :versionString ?versionString .
+}
+ORDER BY ?versionString
+
+# CQ5: What is the end-of-support date for Python version '3.7.0'? (Requires specific version data)
+# Example: Assuming :Python3.7.0 :versionString "3.7.0" ; :endOfSupportDate "YYYY-MM-DD"^^xsd:date .
+SELECT ?eosDate WHERE {
+  ?version :instanceOf :Python ;
+           :versionString "3.7.0" ;
+           :endOfSupportDate ?eosDate .
+}
+
+# CQ6: Which technology versions are known to be incompatible with 'React' version '17.0.0'? (Requires relationship data)
+# Example: Assuming :React17.0.0 :versionString "17.0.0" ; :incompatibleWith :SomeLib1.0.0 .
+SELECT ?incompatibleTech ?incompatibleVersionString WHERE {
+  ?reactVersion :instanceOf :React ;
+                :versionString "17.0.0" .
+  ?reactVersion :incompatibleWith ?incompatibleTechVersion .
+  ?incompatibleTechVersion :instanceOf ?incompatibleTech ;
+                         :versionString ?incompatibleVersionString .
+}
+
+# CQ8: What database technology does 'Supabase' use? (Requires relationship data)
+# Example: Assuming :Supabase :basedOnDatabase :PostgreSQL .
+SELECT ?dbTech ?dbLabel WHERE {
+  :Supabase :basedOnDatabase ?dbTech .
+  ?dbTech rdfs:label ?dbLabel .
+}
+
+# CQ9: Which PaaS platforms support the 'Go' programming language? (Requires relationship data)
+# Example: Assuming :GoogleAppEngine :supportsLanguage :GoLang .
+SELECT ?platform ?platformLabel WHERE {
+  ?platform rdf:type :PaaSPlatform ;
+            :supportsLanguage :GoLang .
+  ?platform rdfs:label ?platformLabel .
+}
+
+# CQ11: List all known security vulnerabilities.
+SELECT ?vulnerability ?title WHERE {
+  ?vulnerability rdf:type :SecurityVulnerability .
+  OPTIONAL { ?vulnerability :problemTitle ?title . }
+}
+
+# CQ12: What is the CVSS score for the vulnerability with CVE ID 'CVE-2023-XXXX'? (Requires specific problem data)
+# Example: Assuming :SomeVuln :cveID "CVE-2023-XXXX" ; :cvssScore 9.8 .
+SELECT ?cvssScore WHERE {
+  ?vulnerability :cveID "CVE-2023-XXXX" ;
+                 :cvssScore ?cvssScore .
+}
+
+# CQ13: Find problems related to 'React' version '16.8.0'. (Requires relationship data)
+# Example: Assuming :React16.8.0 :causesProblem :SomeProblem . OR :SomeProblem :problemManifestsIn :React16.8.0 .
+SELECT DISTINCT ?problem ?problemTitle WHERE {
+  ?reactVersion :instanceOf :React ;
+                :versionString "16.8.0" .
+  { ?reactVersion :causesProblem ?problem . }
+  UNION
+  { ?problem :problemManifestsIn ?reactVersion . }
+  OPTIONAL { ?problem :problemTitle ?problemTitle . }
+}
+
+# CQ16: Find all 'High' severity problems. (Requires specific problem data)
+# Example: Assuming :AnotherProblem :severity "High" .
+SELECT ?problem ?problemTitle WHERE {
+  ?problem :severity "High" .
+  OPTIONAL { ?problem :problemTitle ?problemTitle . }
+}
+
+# CQ18: What solutions are suggested for 'VersionConflict' problems? (Requires relationship data)
+# Example: Assuming :AVersionConflictProblem rdf:type :VersionConflict ; :suggestsSolution :SomeSolution .
+SELECT DISTINCT ?solution ?solutionTitle WHERE {
+  ?problem rdf:type :VersionConflict ;
+           :suggestsSolution ?solution .
+  OPTIONAL { ?solution :solutionTitle ?solutionTitle . }
+}
+
+# CQ21: Which solutions involve architectural refactoring?
+SELECT ?solution ?solutionTitle WHERE {
+  ?solution rdf:type :ArchitecturalRefactoring .
+  OPTIONAL { ?solution :solutionTitle ?solutionTitle . }
+}
+
+# CQ23: What software components implement the 'Microservices' architectural pattern? (Requires relationship data)
+# Example: Assuming :OrderServiceComponent :implementsPattern :Microservices .
+SELECT ?component ?componentName WHERE {
+  ?component :implementsPattern :Microservices .
+  OPTIONAL { ?component :componentName ?componentName . }
+}
+
+# CQ29: What issues are documented specifically in 'OfficialDocumentation'? (Requires relationship data)
+# Example: Assuming :ProblemX :documentedBy :SomeOfficialDocSource . :SomeOfficialDocSource rdf:type :OfficialDocumentation .
+SELECT ?problem ?problemTitle WHERE {
+  ?docSource rdf:type :OfficialDocumentation .
+  ?problem :documentedBy ?docSource .
+  OPTIONAL { ?problem :problemTitle ?problemTitle . }
+}
+
+# CQ30: Find high-severity security vulnerabilities affecting 'Java' versions released before '2022-01-01' that have a known exploit.
+SELECT ?vulnerability ?vulnTitle ?javaVersion ?versionString WHERE {
+  ?vulnerability rdf:type :SecurityVulnerability ;
+                 :severity "High" ; # Assuming severity is string, adjust if needed
+                 :knownExploitExists true ;
+                 :problemManifestsIn ?javaVersion . # Or use :causesProblem depending on model
+
+  ?javaVersion :instanceOf :Java ;
+               :releaseDate ?releaseDate ;
+               :versionString ?versionString .
+
+  FILTER (?releaseDate < "2022-01-01"^^xsd:date)
+  OPTIONAL { ?vulnerability :problemTitle ?vulnTitle . }
+}

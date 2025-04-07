@@ -1,0 +1,177 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/object-properties>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology> ;
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ;
+    owl:imports <http://example.org/software-architecture-ontology/problems> ;
+    owl:imports <http://example.org/software-architecture-ontology/solutions> ;
+    owl:imports <http://example.org/software-architecture-ontology/context> ;
+    owl:imports <http://example.org/software-architecture-ontology/datasources> ;
+    owl:imports <http://example.org/software-architecture-ontology/architecture> ;
+    rdfs:label "Software Architecture Problem Prediction Ontology - Object Properties" ;
+    rdfs:comment "Defines the object properties (relationships between individuals/classes) used throughout the ontology. Imports all class definition modules." .
+
+# --- Core Object Properties ---
+
+:hasVersion rdf:type owl:ObjectProperty ;
+    rdfs:label "has version" ;
+    rdfs:comment "Relates a Technology to a specific TechnologyVersion." ;
+    rdfs:domain :Technology ;
+    rdfs:range :TechnologyVersion .
+
+:instanceOf rdf:type owl:ObjectProperty ;
+    rdfs:label "instance of" ;
+    rdfs:comment "Relates a TechnologyVersion back to the abstract Technology it is a version of." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range :Technology .
+
+:dependsOn rdf:type owl:ObjectProperty ;
+    rdfs:label "depends on" ;
+    rdfs:comment "Indicates that a TechnologyVersion or SoftwareComponent requires another TechnologyVersion to function." ;
+    rdfs:domain [ owl:unionOf ( :TechnologyVersion :SoftwareComponent ) ] ;
+    rdfs:range :TechnologyVersion .
+
+:compatibleWith rdf:type owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "compatible with" ;
+    rdfs:comment "Indicates that two TechnologyVersions are known to work together correctly." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range :TechnologyVersion .
+
+:incompatibleWith rdf:type owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "incompatible with" ;
+    rdfs:comment "Indicates that two TechnologyVersions are known to cause problems when used together." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range :TechnologyVersion .
+
+:requiresMinimumVersion rdf:type owl:ObjectProperty ;
+    rdfs:label "requires minimum version" ;
+    rdfs:comment "Indicates that one TechnologyVersion requires at least a specific version of another TechnologyVersion." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range :TechnologyVersion .
+
+:causesProblem rdf:type owl:ObjectProperty ;
+    rdfs:label "causes problem" ;
+    rdfs:comment "Links a TechnologyVersion, SoftwareComponent, or ArchitecturalAntiPattern to a Problem it is known to cause or contribute to." ;
+    rdfs:domain [ owl:unionOf ( :TechnologyVersion :SoftwareComponent :ArchitecturalAntiPattern ) ] ;
+    rdfs:range :Problem .
+
+:problemManifestsIn rdf:type owl:ObjectProperty ;
+    rdfs:label "problem manifests in" ;
+    rdfs:comment "Links a Problem to the TechnologyVersion or SoftwareComponent where its effects are observed." ;
+    rdfs:domain :Problem ;
+    rdfs:range [ owl:unionOf ( :TechnologyVersion :SoftwareComponent ) ] .
+
+:occursInContext rdf:type owl:ObjectProperty ;
+    rdfs:label "occurs in context" ;
+    rdfs:comment "Links a Problem to the specific Context (project, environment, tooling) in which it is known to occur." ;
+    rdfs:domain :Problem ;
+    rdfs:range :Context .
+
+:suggestsSolution rdf:type owl:ObjectProperty ;
+    rdfs:label "suggests solution" ;
+    rdfs:comment "Links a Problem to a potential Solution." ;
+    rdfs:domain :Problem ;
+    rdfs:range :Solution .
+
+:solvesProblem rdf:type owl:ObjectProperty ;
+    rdfs:label "solves problem" ;
+    rdfs:comment "Links a Solution to the Problem it addresses. Inverse of suggestsSolution." ;
+    owl:inverseOf :suggestsSolution ;
+    rdfs:domain :Solution ;
+    rdfs:range :Problem .
+
+:solutionRequiresContext rdf:type owl:ObjectProperty ;
+    rdfs:label "solution requires context" ;
+    rdfs:comment "Links a Solution to a specific Context that must be present for the solution to be applicable or effective." ;
+    rdfs:domain :Solution ;
+    rdfs:range :Context .
+
+:documentedBy rdf:type owl:ObjectProperty ;
+    rdfs:label "documented by" ;
+    rdfs:comment "Links a Problem or Solution to a DataSource that provides evidence or information about it." ;
+    rdfs:domain [ owl:unionOf ( :Problem :Solution ) ] ;
+    rdfs:range :DataSource .
+
+:implementsPattern rdf:type owl:ObjectProperty ;
+    rdfs:label "implements pattern" ;
+    rdfs:comment "Links a SoftwareComponent to an ArchitecturalPattern it embodies." ;
+    rdfs:domain :SoftwareComponent ;
+    rdfs:range :ArchitecturalPattern .
+
+:exhibitsAntiPattern rdf:type owl:ObjectProperty ;
+    rdfs:label "exhibits anti-pattern" ;
+    rdfs:comment "Links a SoftwareComponent to an ArchitecturalAntiPattern observed in its design or implementation." ;
+    rdfs:domain :SoftwareComponent ;
+    rdfs:range :ArchitecturalAntiPattern .
+
+:usesTechnology rdf:type owl:ObjectProperty ;
+    rdfs:label "uses technology" ;
+    rdfs:comment "Links a SoftwareComponent to a specific TechnologyVersion it utilizes." ;
+    rdfs:domain :SoftwareComponent ;
+    rdfs:range :TechnologyVersion .
+
+:deployedOn rdf:type owl:ObjectProperty ;
+    rdfs:label "deployed on" ;
+    rdfs:comment "Links a SoftwareComponent to the Platform or specific DeploymentEnvironment where it runs." ;
+    rdfs:domain :SoftwareComponent ;
+    rdfs:range [ owl:unionOf ( :Platform :DeploymentEnvironment ) ] .
+
+:integratesWith rdf:type owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "integrates with" ;
+    rdfs:comment "Indicates that two TechnologyVersions or SoftwareComponents interact or exchange data." ;
+    rdfs:domain [ owl:unionOf ( :TechnologyVersion :SoftwareComponent ) ] ;
+    rdfs:range [ owl:unionOf ( :TechnologyVersion :SoftwareComponent ) ] .
+
+:basedOnDatabase rdf:type owl:ObjectProperty ;
+    rdfs:label "based on database" ;
+    rdfs:comment "Links a BaaSPlatform to the underlying DatabaseTechnology it uses." ;
+    rdfs:domain :BaaSPlatform ;
+    rdfs:range :DatabaseTechnology .
+
+:supportsLanguage rdf:type owl:ObjectProperty ;
+    rdfs:label "supports language" ;
+    rdfs:comment "Links a PaaSPlatform or ServerlessPlatform to a ProgrammingLanguage it supports." ;
+    rdfs:domain [ owl:unionOf ( :PaaSPlatform :ServerlessPlatform ) ] ; # Added ServerlessPlatform based on its properties list
+    rdfs:range :ProgrammingLanguage .
+
+:offersDatabase rdf:type owl:ObjectProperty ;
+    rdfs:label "offers database" ;
+    rdfs:comment "Links a PaaSPlatform to a DatabaseTechnology it provides as a service." ;
+    rdfs:domain :PaaSPlatform ;
+    rdfs:range :DatabaseTechnology .
+
+:managesDatabase rdf:type owl:ObjectProperty ;
+    rdfs:label "manages database" ;
+    rdfs:comment "Links a DBaaSPlatform to the specific DatabaseTechnology it manages." ;
+    rdfs:domain :DBaaSPlatform ;
+    rdfs:range :DatabaseTechnology .
+
+:componentRole rdf:type owl:ObjectProperty ;
+    rdfs:label "component role" ;
+    rdfs:comment "Assigns a specific ComponentRole to a SoftwareComponent." ;
+    rdfs:domain :SoftwareComponent ;
+    rdfs:range :ComponentRole .
+
+:targetVersion rdf:type owl:ObjectProperty ;
+    rdfs:label "target version" ;
+    rdfs:comment "Specifies the target TechnologyVersion for a VersionUpdate solution." ;
+    rdfs:domain :VersionUpdate ;
+    rdfs:range :TechnologyVersion .
+
+:suggestedAlternative rdf:type owl:ObjectProperty ;
+    rdfs:label "suggested alternative" ;
+    rdfs:comment "Specifies the alternative Technology suggested by a UseAlternative solution." ;
+    rdfs:domain :UseAlternative ;
+    rdfs:range :Technology .
+
+# Renamed supportsRuntime from ServerlessPlatform to reuse supportsLanguage
+# :supportsRuntime rdf:type owl:ObjectProperty ;
+#     rdfs:label "supports runtime" ;
+#     rdfs:comment "Links a ServerlessPlatform to a ProgrammingLanguage runtime it supports." ;
+#     rdfs:domain :ServerlessPlatform ;
+#     rdfs:range :ProgrammingLanguage .

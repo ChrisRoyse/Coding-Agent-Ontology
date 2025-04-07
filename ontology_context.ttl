@@ -1,0 +1,71 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/context>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology> ; # Imports ontology_core.ttl
+    rdfs:label "Software Architecture Problem Prediction Ontology - Context" ;
+    rdfs:comment "Defines the hierarchy for contextual information, such as project details, environment specifics, and tooling used. Imports core definitions." .
+
+# --- Context Hierarchy ---
+# Note: The :Context class itself is defined in ontology_core.ttl
+
+:ProjectContext rdf:type owl:Class ;
+    rdfs:subClassOf :Context ;
+    rdfs:label "Project Context" ;
+    rdfs:comment "Describes the context related to the software project itself, like its type or team size." .
+    # Properties: projectType (xsd:string), teamSize (xsd:integer) defined in ontology_properties.ttl
+
+:EnvironmentContext rdf:type owl:Class ;
+    rdfs:subClassOf :Context ;
+    rdfs:label "Environment Context" ;
+    rdfs:comment "Describes the context related to the execution or deployment environment." .
+
+:OperatingSystemVersion rdf:type owl:Class ;
+    rdfs:subClassOf :EnvironmentContext ;
+    # Consider linking this to :OperatingSystem via a property if specific OS instances are needed.
+    rdfs:label "Operating System Version" ;
+    rdfs:comment "Specifies the version of the operating system in the context (e.g., Windows 11, Ubuntu 22.04)." .
+    # Could have a property like 'hasOSVersionString' (xsd:string) defined in ontology_properties.ttl
+
+:PlatformVersion rdf:type owl:Class ;
+    rdfs:subClassOf :EnvironmentContext ;
+    # Consider linking this to :Platform via a property if specific platform instances are needed.
+    rdfs:label "Platform Version" ;
+    rdfs:comment "Specifies the version of a relevant platform in the context (e.g., AWS Lambda runtime version, Kubernetes version)." .
+    # Could have a property like 'hasPlatformVersionString' (xsd:string) defined in ontology_properties.ttl
+
+:BrowserVersion rdf:type owl:Class ;
+    rdfs:subClassOf :EnvironmentContext ;
+    # Consider linking this to :Browser via a property if specific browser instances are needed.
+    rdfs:label "Browser Version" ;
+    rdfs:comment "Specifies the version of the web browser in the context (e.g., Chrome 110, Firefox 109)." .
+    # Could have a property like 'hasBrowserVersionString' (xsd:string) defined in ontology_properties.ttl
+
+:DeploymentEnvironment rdf:type owl:Class ;
+    rdfs:subClassOf :EnvironmentContext ;
+    rdfs:label "Deployment Environment Type" ;
+    rdfs:comment "Specifies the type of deployment environment (e.g., 'Development', 'Staging', 'Production'). Represented as a class to allow specific environment instances if needed, or use a datatype property directly on EnvironmentContext." .
+    # Could have a property like 'environmentName' (xsd:string) defined in ontology_properties.ttl, potentially replacing this class if only the string value is needed. The spec asked for xsd:string property.
+
+:ToolingContext rdf:type owl:Class ;
+    rdfs:subClassOf :Context ;
+    rdfs:label "Tooling Context" ;
+    rdfs:comment "Describes the context related to the development tools used, such as package managers or build tools." .
+
+:PackageManager rdf:type owl:Class ;
+    rdfs:subClassOf :ToolingContext ;
+    # Consider linking this to :DevelopmentTool if specific tool instances are needed.
+    rdfs:label "Package Manager Context" ;
+    rdfs:comment "Specifies the package manager and its version used in the context (e.g., npm 8.19.2, pip 23.0)." .
+    # Properties: toolVersion (xsd:string) defined in ontology_properties.ttl
+
+:BuildTool rdf:type owl:Class ;
+    rdfs:subClassOf :ToolingContext ;
+    # Consider linking this to :DevelopmentTool if specific tool instances are needed.
+    rdfs:label "Build Tool Context" ;
+    rdfs:comment "Specifies the build tool and its version used in the context (e.g., Webpack 5.75, Maven 3.8)." .
+    # Properties: toolVersion (xsd:string) defined in ontology_properties.ttl

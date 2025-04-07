@@ -1,0 +1,105 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/technologies>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology> ; # Imports ontology_core.ttl
+    owl:imports <http://example.org/software-architecture-ontology/architecture> ; # Imports ontology_architecture.ttl for ComponentRole
+    rdfs:label "Software Architecture Problem Prediction Ontology - Technologies" ;
+    rdfs:comment "Defines the hierarchy of software technologies, versions, and components. Imports core definitions." .
+
+# --- Software Entity Hierarchy ---
+
+:Technology rdf:type owl:Class ;
+    rdfs:subClassOf :SoftwareEntity ;
+    rdfs:label "Technology" ;
+    rdfs:comment "An abstract class representing a specific technology (e.g., a language, framework, platform). Specific instances or subclasses represent concrete technologies." .
+    # Properties like hasName, hasDescription, hasHomepage, hasLicenseType are defined in ontology_properties.ttl
+
+:ProgrammingLanguage rdf:type owl:Class ;
+    rdfs:subClassOf :Technology ;
+    rdfs:label "Programming Language" ;
+    rdfs:comment "A formal language comprising a set of instructions that produce various kinds of output." .
+
+:Framework rdf:type owl:Class ;
+    rdfs:subClassOf :Technology ;
+    rdfs:label "Framework" ;
+    rdfs:comment "A software framework provides a standard way to build and deploy applications. It's an abstraction in which software providing generic functionality can be selectively changed by additional user-written code." .
+
+:Library rdf:type owl:Class ;
+    rdfs:subClassOf :Technology ;
+    rdfs:label "Library" ;
+    rdfs:comment "A collection of non-volatile resources used by computer programs, often for software development." .
+
+:Platform rdf:type owl:Class ;
+    rdfs:subClassOf :Technology ;
+    rdfs:label "Platform" ;
+    rdfs:comment "A computing platform or digital platform is an environment in which a piece of software is executed. It may be the hardware or the operating system (OS), even a web browser and associated application programming interfaces, or other underlying software." .
+
+:BaaSPlatform rdf:type owl:Class ;
+    rdfs:subClassOf :Platform ;
+    rdfs:label "Backend-as-a-Service Platform" ;
+    rdfs:comment "A cloud service model where developers outsource all the behind-the-scenes aspects of a web or mobile application." .
+    # Properties: providesAuthentication, providesRealtimeDB, providesStorage, providesFunctions, basedOnDatabase defined in ontology_properties.ttl
+
+:PaaSPlatform rdf:type owl:Class ;
+    rdfs:subClassOf :Platform ;
+    rdfs:label "Platform-as-a-Service Platform" ;
+    rdfs:comment "A category of cloud computing services that provides a platform allowing customers to develop, run, and manage applications without the complexity of building and maintaining the infrastructure." .
+    # Properties: supportsLanguage, offersDatabase, hasPricingModel defined in ontology_properties.ttl
+
+:DBaaSPlatform rdf:type owl:Class ;
+    rdfs:subClassOf :Platform ;
+    rdfs:label "Database-as-a-Service Platform" ;
+    rdfs:comment "A cloud computing service that provides users with access to a database without requiring them to set up physical hardware, install software, or configure the database." .
+    # Properties: managesDatabase, offersBackup, providesScalability defined in ontology_properties.ttl
+
+:APIManagementPlatform rdf:type owl:Class ;
+    rdfs:subClassOf :Platform ;
+    rdfs:label "API Management Platform" ;
+    rdfs:comment "A platform for creating and publishing application programming interfaces (APIs), enforcing their usage policies, controlling access, nurturing the subscriber community, collecting and analyzing usage statistics, and reporting on performance." .
+    # Properties: providesGateway, providesAnalytics, supportsAuthMethod defined in ontology_properties.ttl
+
+:ServerlessPlatform rdf:type owl:Class ;
+    rdfs:subClassOf :Platform ;
+    rdfs:label "Serverless Platform" ;
+    rdfs:comment "A cloud-computing execution model in which the cloud provider runs the server, and dynamically manages the allocation of machine resources (Function-as-a-Service)." .
+    # Properties: supportsRuntime, hasInvocationLimit defined in ontology_properties.ttl
+
+:DatabaseTechnology rdf:type owl:Class ;
+    rdfs:subClassOf :Technology ;
+    rdfs:label "Database Technology" ;
+    rdfs:comment "Technology specifically related to database systems (e.g., MySQL, PostgreSQL, MongoDB)." .
+    # Properties: databaseModel defined in ontology_properties.ttl
+
+:DevelopmentTool rdf:type owl:Class ;
+    rdfs:subClassOf :Technology ;
+    rdfs:label "Development Tool" ;
+    rdfs:comment "Software used by developers for creating, debugging, maintaining, or otherwise supporting other programs and applications (e.g., IDEs, build tools, package managers)." .
+
+:OperatingSystem rdf:type owl:Class ;
+    rdfs:subClassOf :Technology ;
+    rdfs:label "Operating System" ;
+    rdfs:comment "System software that manages computer hardware, software resources, and provides common services for computer programs." .
+
+:Browser rdf:type owl:Class ;
+    rdfs:subClassOf :Technology ;
+    rdfs:label "Browser" ;
+    rdfs:comment "A software application for accessing information on the World Wide Web." .
+
+:TechnologyVersion rdf:type owl:Class ;
+    rdfs:subClassOf :SoftwareEntity ;
+    rdfs:label "Technology Version" ;
+    rdfs:comment "Represents a specific version of a Technology (e.g., Python 3.9.1). Links back to the base Technology via 'instanceOf'." .
+    # Properties: versionString, releaseDate, endOfSupportDate, maturityLevel, isLatestStable defined in ontology_properties.ttl
+    # Relationships: instanceOf, dependsOn, compatibleWith, incompatibleWith, requiresMinimumVersion defined in ontology_properties.ttl
+
+:SoftwareComponent rdf:type owl:Class ;
+    rdfs:subClassOf :SoftwareEntity ;
+    rdfs:label "Software Component" ;
+    rdfs:comment "A modular part of a software system that encapsulates a set of related functions or data. It interacts with other components via interfaces." .
+    # Properties: componentName defined in ontology_properties.ttl
+    # Relationships: componentRole, dependsOn, causesProblem, problemManifestsIn, implementsPattern, exhibitsAntiPattern, usesTechnology, deployedOn, integratesWith defined in ontology_properties.ttl

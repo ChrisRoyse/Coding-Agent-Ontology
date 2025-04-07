@@ -1,0 +1,359 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/datatype-properties>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology> ;
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ;
+    owl:imports <http://example.org/software-architecture-ontology/problems> ;
+    owl:imports <http://example.org/software-architecture-ontology/solutions> ;
+    owl:imports <http://example.org/software-architecture-ontology/context> ;
+    owl:imports <http://example.org/software-architecture-ontology/datasources> ;
+    # No architecture import needed as no datatype properties defined there
+    rdfs:label "Software Architecture Problem Prediction Ontology - Datatype Properties" ;
+    rdfs:comment "Defines the datatype properties (linking individuals to literal values) used throughout the ontology. Imports relevant class definition modules." .
+
+# --- Datatype Properties from Technology Hierarchy ---
+
+:hasName rdf:type owl:DatatypeProperty ;
+    rdfs:label "has name" ;
+    rdfs:comment "The common name of the technology." ;
+    rdfs:domain :Technology ;
+    rdfs:range xsd:string .
+
+:hasDescription rdf:type owl:DatatypeProperty ;
+    rdfs:label "has description" ;
+    rdfs:comment "A brief description of the technology." ;
+    rdfs:domain :Technology ;
+    rdfs:range xsd:string .
+
+:hasHomepage rdf:type owl:DatatypeProperty ;
+    rdfs:label "has homepage" ;
+    rdfs:comment "The official homepage URL for the technology." ;
+    rdfs:domain :Technology ;
+    rdfs:range xsd:anyURI .
+
+:hasLicenseType rdf:type owl:DatatypeProperty ;
+    rdfs:label "has license type" ;
+    rdfs:comment "The type of license under which the technology is distributed (e.g., MIT, GPL, Apache 2.0)." ;
+    rdfs:domain :Technology ;
+    rdfs:range xsd:string .
+
+:providesAuthentication rdf:type owl:DatatypeProperty ;
+    rdfs:label "provides authentication" ;
+    rdfs:comment "Indicates if a BaaS platform offers built-in user authentication services." ;
+    rdfs:domain :BaaSPlatform ;
+    rdfs:range xsd:boolean .
+
+:providesRealtimeDB rdf:type owl:DatatypeProperty ;
+    rdfs:label "provides realtime DB" ;
+    rdfs:comment "Indicates if a BaaS platform offers a real-time database feature." ;
+    rdfs:domain :BaaSPlatform ;
+    rdfs:range xsd:boolean .
+
+:providesStorage rdf:type owl:DatatypeProperty ;
+    rdfs:label "provides storage" ;
+    rdfs:comment "Indicates if a BaaS platform offers file or object storage." ;
+    rdfs:domain :BaaSPlatform ;
+    rdfs:range xsd:boolean .
+
+:providesFunctions rdf:type owl:DatatypeProperty ;
+    rdfs:label "provides functions" ;
+    rdfs:comment "Indicates if a BaaS platform offers serverless function capabilities (similar to FaaS)." ;
+    rdfs:domain :BaaSPlatform ;
+    rdfs:range xsd:boolean .
+
+:hasPricingModel rdf:type owl:DatatypeProperty ;
+    rdfs:label "has pricing model" ;
+    rdfs:comment "Describes the pricing structure of a PaaS platform (e.g., 'Pay-as-you-go', 'Subscription Tiered')." ;
+    rdfs:domain :PaaSPlatform ;
+    rdfs:range xsd:string .
+
+:offersBackup rdf:type owl:DatatypeProperty ;
+    rdfs:label "offers backup" ;
+    rdfs:comment "Indicates if a DBaaS platform provides automated backup services." ;
+    rdfs:domain :DBaaSPlatform ;
+    rdfs:range xsd:boolean .
+
+:providesScalability rdf:type owl:DatatypeProperty ;
+    rdfs:label "provides scalability" ;
+    rdfs:comment "Describes the scalability options offered by a DBaaS platform (e.g., 'Automatic', 'Manual Vertical', 'Horizontal Sharding')." ;
+    rdfs:domain :DBaaSPlatform ;
+    rdfs:range xsd:string .
+
+:providesGateway rdf:type owl:DatatypeProperty ;
+    rdfs:label "provides gateway" ;
+    rdfs:comment "Indicates if an API Management platform includes an API gateway component." ;
+    rdfs:domain :APIManagementPlatform ;
+    rdfs:range xsd:boolean .
+
+:providesAnalytics rdf:type owl:DatatypeProperty ;
+    rdfs:label "provides analytics" ;
+    rdfs:comment "Indicates if an API Management platform offers usage analytics." ;
+    rdfs:domain :APIManagementPlatform ;
+    rdfs:range xsd:boolean .
+
+:supportsAuthMethod rdf:type owl:DatatypeProperty ;
+    rdfs:label "supports auth method" ;
+    rdfs:comment "Describes an authentication method supported by the API Management platform (e.g., 'API Key', 'OAuth2', 'JWT'). Can have multiple values." ;
+    rdfs:domain :APIManagementPlatform ;
+    rdfs:range xsd:string .
+
+:hasInvocationLimit rdf:type owl:DatatypeProperty ;
+    rdfs:label "has invocation limit" ;
+    rdfs:comment "Specifies any invocation limits (e.g., per month, per second) for a Serverless Platform function, often related to free tiers or pricing." ;
+    rdfs:domain :ServerlessPlatform ;
+    rdfs:range xsd:integer .
+
+:databaseModel rdf:type owl:DatatypeProperty ;
+    rdfs:label "database model" ;
+    rdfs:comment "Specifies the primary data model of the database technology (e.g., 'Relational', 'Document', 'Key-Value', 'Graph')." ;
+    rdfs:domain :DatabaseTechnology ;
+    rdfs:range xsd:string .
+
+:versionString rdf:type owl:DatatypeProperty ;
+    rdfs:label "version string" ;
+    rdfs:comment "The specific version identifier (e.g., '3.9.1', '16.14.0')." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range xsd:string .
+
+:releaseDate rdf:type owl:DatatypeProperty ;
+    rdfs:label "release date" ;
+    rdfs:comment "The date when this specific technology version was released." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range xsd:date .
+
+:endOfSupportDate rdf:type owl:DatatypeProperty ;
+    rdfs:label "end of support date" ;
+    rdfs:comment "The date when official support (including security patches) for this version ends or ended." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range xsd:date .
+
+:maturityLevel rdf:type owl:DatatypeProperty ;
+    rdfs:label "maturity level" ;
+    rdfs:comment "The development stage of this version (e.g., 'Alpha', 'Beta', 'Release Candidate', 'Stable', 'Deprecated')." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range xsd:string .
+
+:isLatestStable rdf:type owl:DatatypeProperty ;
+    rdfs:label "is latest stable" ;
+    rdfs:comment "Indicates if this version is the most current stable release of the technology." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range xsd:boolean .
+
+:componentName rdf:type owl:DatatypeProperty ;
+    rdfs:label "component name" ;
+    rdfs:comment "The name assigned to the software component within the system." ;
+    rdfs:domain :SoftwareComponent ;
+    rdfs:range xsd:string .
+
+# --- Datatype Properties from Problem Hierarchy ---
+
+:problemTitle rdf:type owl:DatatypeProperty ;
+    rdfs:label "problem title" ;
+    rdfs:comment "A concise title summarizing the problem." ;
+    rdfs:domain :Problem ;
+    rdfs:range xsd:string .
+
+:problemDescription rdf:type owl:DatatypeProperty ;
+    rdfs:label "problem description" ;
+    rdfs:comment "A detailed description of the problem, its symptoms, and context." ;
+    rdfs:domain :Problem ;
+    rdfs:range xsd:string .
+
+:severity rdf:type owl:DatatypeProperty ;
+    rdfs:label "severity" ;
+    rdfs:comment "An assessment of the impact or seriousness of the problem (e.g., 'Critical', 'High', 'Medium', 'Low', 'Informational')." ;
+    rdfs:domain :Problem ;
+    rdfs:range xsd:string .
+
+:status rdf:type owl:DatatypeProperty ;
+    rdfs:label "status" ;
+    rdfs:comment "The current status of the problem (e.g., 'Open', 'Confirmed', 'Resolved', 'Won't Fix')." ;
+    rdfs:domain :Problem ;
+    rdfs:range xsd:string .
+
+:firstReported rdf:type owl:DatatypeProperty ;
+    rdfs:label "first reported" ;
+    rdfs:comment "The date when the problem was initially reported or discovered." ;
+    rdfs:domain :Problem ;
+    rdfs:range xsd:date .
+
+:lastObserved rdf:type owl:DatatypeProperty ;
+    rdfs:label "last observed" ;
+    rdfs:comment "The date when the problem was last observed or confirmed to be present." ;
+    rdfs:domain :Problem ;
+    rdfs:range xsd:date .
+
+:impactsArea rdf:type owl:DatatypeProperty ;
+    rdfs:label "impacts area" ;
+    rdfs:comment "Describes the functional or non-functional area impacted by the problem (e.g., 'Authentication', 'Performance', 'UI Rendering', 'Security')." ;
+    rdfs:domain :Problem ;
+    rdfs:range xsd:string .
+
+:cveID rdf:type owl:DatatypeProperty ;
+    rdfs:label "CVE ID" ;
+    rdfs:comment "The Common Vulnerabilities and Exposures identifier for a security vulnerability, if available." ;
+    rdfs:domain :SecurityVulnerability ;
+    rdfs:range xsd:string .
+
+:cvssScore rdf:type owl:DatatypeProperty ;
+    rdfs:label "CVSS score" ;
+    rdfs:comment "The Common Vulnerability Scoring System score, indicating the severity of the vulnerability." ;
+    rdfs:domain :SecurityVulnerability ;
+    rdfs:range xsd:float .
+
+:knownExploitExists rdf:type owl:DatatypeProperty ;
+    rdfs:label "known exploit exists" ;
+    rdfs:comment "Indicates whether a known, publicly available exploit exists for the vulnerability." ;
+    rdfs:domain :SecurityVulnerability ;
+    rdfs:range xsd:boolean .
+
+# --- Datatype Properties from Solution Hierarchy ---
+
+:solutionTitle rdf:type owl:DatatypeProperty ;
+    rdfs:label "solution title" ;
+    rdfs:comment "A concise title summarizing the solution." ;
+    rdfs:domain :Solution ;
+    rdfs:range xsd:string .
+
+:solutionDescription rdf:type owl:DatatypeProperty ;
+    rdfs:label "solution description" ;
+    rdfs:comment "A detailed description of the solution, how it works, and how to implement it." ;
+    rdfs:domain :Solution ;
+    rdfs:range xsd:string .
+
+:complexity rdf:type owl:DatatypeProperty ;
+    rdfs:label "complexity" ;
+    rdfs:comment "An assessment of the complexity of implementing the solution (e.g., 'Low', 'Medium', 'High')." ;
+    rdfs:domain :Solution ;
+    rdfs:range xsd:string .
+
+:requiredEffort rdf:type owl:DatatypeProperty ;
+    rdfs:label "required effort" ;
+    rdfs:comment "An estimate of the time or effort required to implement the solution (e.g., using xsd:duration like 'PT2H' for 2 hours, 'P1D' for 1 day)." ;
+    rdfs:domain :Solution ;
+    rdfs:range xsd:duration .
+
+:successRateEstimate rdf:type owl:DatatypeProperty ;
+    rdfs:label "success rate estimate" ;
+    rdfs:comment "An estimated probability (0.0 to 1.0) that this solution will successfully resolve the problem." ;
+    rdfs:domain :Solution ;
+    rdfs:range xsd:float .
+
+:hasSideEffects rdf:type owl:DatatypeProperty ;
+    rdfs:label "has side effects" ;
+    rdfs:comment "A description of any known negative side effects or risks associated with implementing the solution." ;
+    rdfs:domain :Solution ;
+    rdfs:range xsd:string .
+
+# --- Datatype Properties from Context Hierarchy ---
+
+:projectType rdf:type owl:DatatypeProperty ;
+    rdfs:label "project type" ;
+    rdfs:comment "The type or domain of the software project (e.g., 'Web Application', 'Mobile App', 'Data Pipeline', 'Embedded System')." ;
+    rdfs:domain :ProjectContext ;
+    rdfs:range xsd:string .
+
+:teamSize rdf:type owl:DatatypeProperty ;
+    rdfs:label "team size" ;
+    rdfs:comment "The approximate number of developers working on the project." ;
+    rdfs:domain :ProjectContext ;
+    rdfs:range xsd:integer .
+
+:toolVersion rdf:type owl:DatatypeProperty ;
+    rdfs:label "tool version" ;
+    rdfs:comment "The specific version of a development tool (like a package manager or build tool) being used." ;
+    rdfs:domain [ owl:unionOf ( :PackageManager :BuildTool ) ] ;
+    rdfs:range xsd:string .
+
+# --- Datatype Properties from DataSource Hierarchy ---
+
+:sourceURI rdf:type owl:DatatypeProperty ;
+    rdfs:label "source URI" ;
+    rdfs:comment "The URI (URL or other identifier) pointing to the specific data source." ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:anyURI .
+
+:retrievedDate rdf:type owl:DatatypeProperty ;
+    rdfs:label "retrieved date" ;
+    rdfs:comment "The date and time when the information from this data source was retrieved or recorded." ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:dateTime .
+
+:sourceCredibility rdf:type owl:DatatypeProperty ;
+    rdfs:label "source credibility" ;
+    rdfs:comment "An estimated score (e.g., 0.0 to 1.0) representing the trustworthiness or reliability of the data source." ;
+    rdfs:domain :DataSource ;
+    rdfs:range xsd:float .
+
+:questionId rdf:type owl:DatatypeProperty ;
+    rdfs:label "question ID" ;
+    rdfs:comment "The unique identifier for the question on Stack Overflow." ;
+    rdfs:domain :StackOverflowPost ;
+    rdfs:range xsd:integer .
+
+:answerId rdf:type owl:DatatypeProperty ;
+    rdfs:label "answer ID" ;
+    rdfs:comment "The unique identifier for a specific answer on Stack Overflow (if the source is an answer)." ;
+    rdfs:domain :StackOverflowPost ;
+    rdfs:range xsd:integer .
+
+:score rdf:type owl:DatatypeProperty ;
+    rdfs:label "score" ;
+    rdfs:comment "The vote score of the Stack Overflow question or answer." ;
+    rdfs:domain :StackOverflowPost ;
+    rdfs:range xsd:integer .
+
+:isAcceptedAnswer rdf:type owl:DatatypeProperty ;
+    rdfs:label "is accepted answer" ;
+    rdfs:comment "Indicates if the Stack Overflow answer was marked as the accepted solution by the question asker." ;
+    rdfs:domain :StackOverflowPost ;
+    rdfs:range xsd:boolean .
+
+:repositoryURL rdf:type owl:DatatypeProperty ;
+    rdfs:label "repository URL" ;
+    rdfs:comment "The URL of the GitHub repository where the issue was reported." ;
+    rdfs:domain :GitHubIssue ;
+    rdfs:range xsd:anyURI .
+
+:issueNumber rdf:type owl:DatatypeProperty ;
+    rdfs:label "issue number" ;
+    rdfs:comment "The unique number identifying the issue within the GitHub repository." ;
+    rdfs:domain :GitHubIssue ;
+    rdfs:range xsd:integer .
+
+:issueState rdf:type owl:DatatypeProperty ;
+    rdfs:label "issue state" ;
+    rdfs:comment "The state of the GitHub issue (e.g., 'open', 'closed', 'merged')." ;
+    rdfs:domain :GitHubIssue ;
+    rdfs:range xsd:string .
+
+# --- Datatype Properties from Section IX ---
+
+:dependencyType rdf:type owl:DatatypeProperty ;
+    rdfs:label "dependency type" ;
+    rdfs:comment "Describes the nature of a dependency relationship (e.g., 'direct', 'transitive', 'peer', 'dev'). Domain is complex in pure OWL; consider attaching to reified statements or using property graphs if needed. Placeholder domain assigned." ;
+    rdfs:domain [ owl:unionOf ( :TechnologyVersion :SoftwareComponent ) ] ; # Placeholder domain
+    rdfs:range xsd:string .
+
+:conflictsWithVersionRange rdf:type owl:DatatypeProperty ;
+    rdfs:label "conflicts with version range" ;
+    rdfs:comment "Specifies a version range (as a string, e.g., '>=1.0.0 <2.0.0') of a dependency that causes a conflict with this TechnologyVersion." ;
+    rdfs:domain :TechnologyVersion ;
+    rdfs:range xsd:string .
+
+:confirmationCount rdf:type owl:DatatypeProperty ;
+    rdfs:label "confirmation count" ;
+    rdfs:comment "The number of independent sources or reports confirming a specific Problem or the effectiveness of a Solution." ;
+    rdfs:domain [ owl:unionOf ( :Problem :Solution ) ] ;
+    rdfs:range xsd:integer .
+
+:confidenceScore rdf:type owl:DatatypeProperty ;
+    rdfs:label "confidence score" ;
+    rdfs:comment "A calculated score (e.g., 0.0 to 1.0) representing the confidence in the existence of a Problem or the effectiveness of a Solution, potentially derived from source credibility and confirmation count." ;
+    rdfs:domain [ owl:unionOf ( :Problem :Solution ) ] ;
+    rdfs:range xsd:float .

@@ -1,0 +1,108 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/problems>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology> ; # Imports ontology_core.ttl
+    owl:imports <http://example.org/software-architecture-ontology/architecture> ; # Imports ontology_architecture.ttl for ArchitecturalAntiPattern link
+    rdfs:label "Software Architecture Problem Prediction Ontology - Problems" ;
+    rdfs:comment "Defines the hierarchy of potential problems, issues, and vulnerabilities in software systems. Imports core definitions." .
+
+# --- Problem Hierarchy ---
+# Note: The :Problem class itself is defined in ontology_core.ttl
+# Properties like problemTitle, severity, etc., are defined in ontology_properties.ttl
+
+:DependencyIssue rdf:type owl:Class ;
+    rdfs:subClassOf :Problem ;
+    rdfs:label "Dependency Issue" ;
+    rdfs:comment "A problem arising from the relationships between software components or libraries." .
+
+:VersionConflict rdf:type owl:Class ;
+    rdfs:subClassOf :DependencyIssue ;
+    rdfs:label "Version Conflict" ;
+    rdfs:comment "A dependency issue where two or more components require different, incompatible versions of the same shared dependency." .
+
+:TransitiveDependencyConflict rdf:type owl:Class ;
+    rdfs:subClassOf :DependencyIssue ;
+    rdfs:label "Transitive Dependency Conflict" ;
+    rdfs:comment "A version conflict arising not from direct dependencies, but from dependencies of dependencies." .
+
+:PeerDependencyConflict rdf:type owl:Class ;
+    rdfs:subClassOf :DependencyIssue ;
+    rdfs:label "Peer Dependency Conflict" ;
+    rdfs:comment "A dependency issue specific to package managers (like npm) where a package requires another package to be installed alongside it at a specific version range, which conflicts with other requirements." .
+
+:MissingDependency rdf:type owl:Class ;
+    rdfs:subClassOf :DependencyIssue ;
+    rdfs:label "Missing Dependency" ;
+    rdfs:comment "A dependency issue where a required component or library is not installed or available." .
+
+:CircularDependency rdf:type owl:Class ;
+    rdfs:subClassOf :DependencyIssue ;
+    rdfs:label "Circular Dependency" ;
+    rdfs:comment "A dependency issue where two or more components depend on each other, directly or indirectly, creating a cycle that can cause issues in build systems or runtime loading." .
+
+:CompatibilityIssue rdf:type owl:Class ;
+    rdfs:subClassOf :Problem ;
+    rdfs:label "Compatibility Issue" ;
+    rdfs:comment "A problem where different software components, platforms, or environments cannot work together correctly." .
+
+:APIBreakingChange rdf:type owl:Class ;
+    rdfs:subClassOf :CompatibilityIssue ;
+    rdfs:label "API Breaking Change" ;
+    rdfs:comment "A compatibility issue caused by a change in a library or service's API that is not backward compatible, breaking existing integrations." .
+
+:PlatformIncompatibility rdf:type owl:Class ;
+    rdfs:subClassOf :CompatibilityIssue ;
+    rdfs:label "Platform Incompatibility" ;
+    rdfs:comment "A compatibility issue where software designed for one platform (OS, hardware, cloud) does not function correctly on another." .
+
+:BrowserCompatibilityIssue rdf:type owl:Class ;
+    rdfs:subClassOf :CompatibilityIssue ;
+    rdfs:label "Browser Compatibility Issue" ;
+    rdfs:comment "A compatibility issue where a web application or feature works differently or fails in specific web browsers or browser versions." .
+
+:LanguageVersionIncompatibility rdf:type owl:Class ;
+    rdfs:subClassOf :CompatibilityIssue ;
+    rdfs:label "Language Version Incompatibility" ;
+    rdfs:comment "A compatibility issue arising from using code or libraries that require different, incompatible versions of a programming language runtime or standard library." .
+
+:SecurityVulnerability rdf:type owl:Class ;
+    rdfs:subClassOf :Problem ;
+    rdfs:label "Security Vulnerability" ;
+    rdfs:comment "A weakness in a system that can be exploited to compromise security (confidentiality, integrity, availability)." .
+    # Properties: cveID, cvssScore, knownExploitExists defined in ontology_properties.ttl
+
+:PerformanceIssue rdf:type owl:Class ;
+    rdfs:subClassOf :Problem ;
+    rdfs:label "Performance Issue" ;
+    rdfs:comment "A problem related to the speed, responsiveness, resource usage, or scalability of the software." .
+
+:ScalabilityBottleneck rdf:type owl:Class ;
+    rdfs:subClassOf :PerformanceIssue ;
+    rdfs:label "Scalability Bottleneck" ;
+    rdfs:comment "A performance issue where a specific part of the system limits its ability to handle increased load." .
+
+:MemoryLeak rdf:type owl:Class ;
+    rdfs:subClassOf :PerformanceIssue ;
+    rdfs:label "Memory Leak" ;
+    rdfs:comment "A performance issue where a program incorrectly manages memory allocations in such a way that memory which is no longer needed is not released." .
+
+:HighLatency rdf:type owl:Class ;
+    rdfs:subClassOf :PerformanceIssue ;
+    rdfs:label "High Latency" ;
+    rdfs:comment "A performance issue characterized by significant delays in response time or processing." .
+
+:ConfigurationIssue rdf:type owl:Class ;
+    rdfs:subClassOf :Problem ;
+    rdfs:label "Configuration Issue" ;
+    rdfs:comment "A problem caused by incorrect or suboptimal settings in configuration files, environment variables, or deployment parameters." .
+
+:ArchitectureIssue rdf:type owl:Class ;
+    rdfs:subClassOf :Problem ;
+    rdfs:label "Architecture Issue" ;
+    rdfs:comment "A problem stemming from fundamental flaws or anti-patterns in the software's design or structure." .
+    # Note: This class is intended to be linked to :ArchitecturalAntiPattern via properties defined elsewhere.

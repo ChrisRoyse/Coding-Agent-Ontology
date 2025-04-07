@@ -1,0 +1,185 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/individuals/platforms>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ;
+    owl:imports <http://example.org/software-architecture-ontology/datatype-properties> ;
+    owl:imports <http://example.org/software-architecture-ontology/object-properties> ; # Needed for platform-specific object properties
+    rdfs:label "Software Architecture Problem Prediction Ontology - Individuals (Platforms & Cloud Services)" ;
+    rdfs:comment "Defines individuals for various platforms (BaaS, PaaS, DBaaS, etc.), cloud services, and low-code/no-code platforms." .
+
+# --- BaaS Platform Individuals ---
+
+:Firebase rdf:type :BaaSPlatform ;
+    rdfs:label "Firebase" ;
+    :hasName "Firebase" .
+
+:Supabase rdf:type :BaaSPlatform ;
+    rdfs:label "Supabase" ;
+    :hasName "Supabase" .
+
+:AWSAmplify rdf:type :BaaSPlatform ; # Also potentially PaaS elements
+    rdfs:label "AWS Amplify" ;
+    :hasName "AWS Amplify" .
+
+:Appwrite rdf:type :BaaSPlatform ;
+    rdfs:label "Appwrite" ;
+    :hasName "Appwrite" .
+
+:ParsePlatform rdf:type :BaaSPlatform ;
+    rdfs:label "Parse Platform" ;
+    :hasName "Parse Platform" .
+
+:Backendless rdf:type :BaaSPlatform ;
+    rdfs:label "Backendless" ;
+    :hasName "Backendless" .
+
+:Back4app rdf:type :BaaSPlatform ;
+    rdfs:label "Back4app" ;
+    :hasName "Back4app" .
+
+:PocketBase rdf:type :BaaSPlatform ;
+    rdfs:label "PocketBase" ;
+    :hasName "PocketBase" .
+
+:Realm rdf:type :BaaSPlatform ; # Often associated with MongoDB Atlas
+    rdfs:label "Realm (MongoDB)" ;
+    :hasName "Realm" .
+
+# --- PaaS Platform / Cloud Platform Individuals ---
+
+:AWSElasticBeanstalk rdf:type :PaaSPlatform ;
+    rdfs:label "AWS Elastic Beanstalk" ;
+    :hasName "AWS Elastic Beanstalk" .
+
+:MicrosoftAzureAppService rdf:type :PaaSPlatform ;
+    rdfs:label "Microsoft Azure App Service" ;
+    :hasName "Microsoft Azure App Service" .
+
+:GoogleAppEngine rdf:type :PaaSPlatform ;
+    rdfs:label "Google App Engine" ;
+    :hasName "Google App Engine" .
+
+:Heroku rdf:type :PaaSPlatform ;
+    rdfs:label "Heroku" ;
+    :hasName "Heroku" .
+
+:RedHatOpenShift rdf:type :PaaSPlatform ; # Can also be self-hosted, but often used as PaaS
+    rdfs:label "Red Hat OpenShift" ;
+    :hasName "Red Hat OpenShift" .
+
+# --- DBaaS Platform Individuals ---
+
+:MongoDBAtlas rdf:type :DBaaSPlatform , :BaaSPlatform ; # Dual nature
+    rdfs:label "MongoDB Atlas" ;
+    :hasName "MongoDB Atlas" .
+
+:AmazonDynamoDB rdf:type :DBaaSPlatform ;
+    rdfs:label "Amazon DynamoDB" ;
+    :hasName "Amazon DynamoDB" .
+    # :managesDatabase :DynamoDB (if DynamoDB is defined as a :DatabaseTechnology)
+
+:MicrosoftAzureSQLDatabase rdf:type :DBaaSPlatform ;
+    rdfs:label "Microsoft Azure SQL Database" ;
+    :hasName "Microsoft Azure SQL Database" .
+    # :managesDatabase :SQLServer (if SQLServer is defined as a :DatabaseTechnology)
+
+:AmazonRDS rdf:type :DBaaSPlatform ;
+    rdfs:label "Amazon RDS" ;
+    :hasName "Amazon RDS" .
+    # Can manage multiple DB types (:MySQL, :PostgreSQL, etc.) - requires careful modeling
+
+:GoogleCloudSQL rdf:type :DBaaSPlatform ;
+    rdfs:label "Google Cloud SQL" ;
+    :hasName "Google Cloud SQL" .
+    # Can manage multiple DB types (:MySQL, :PostgreSQL, etc.) - requires careful modeling
+
+# --- API Management Platform Individuals ---
+
+:KongGateway rdf:type :APIManagementPlatform ;
+    rdfs:label "Kong Gateway" ;
+    :hasName "Kong Gateway" .
+
+:Apigee rdf:type :APIManagementPlatform ; # Google Cloud
+    rdfs:label "Apigee (Google Cloud)" ;
+    :hasName "Apigee" .
+
+:AzureAPIManagement rdf:type :APIManagementPlatform ;
+    rdfs:label "Azure API Management" ;
+    :hasName "Azure API Management" .
+
+:AWSAPIGateway rdf:type :APIManagementPlatform ; # Primarily a gateway, but fits best here
+    rdfs:label "AWS API Gateway" ;
+    :hasName "AWS API Gateway" .
+    # Note: Postman is primarily a :DevelopmentTool, defined elsewhere.
+
+# --- Serverless Platform Individuals ---
+
+:AWSLambda rdf:type :ServerlessPlatform ;
+    rdfs:label "AWS Lambda" ;
+    :hasName "AWS Lambda" .
+
+:GoogleCloudFunctions rdf:type :ServerlessPlatform ;
+    rdfs:label "Google Cloud Functions" ;
+    :hasName "Google Cloud Functions" .
+
+:AzureFunctions rdf:type :ServerlessPlatform ;
+    rdfs:label "Azure Functions" ;
+    :hasName "Azure Functions" .
+
+:CloudflareWorkers rdf:type :ServerlessPlatform ;
+    rdfs:label "Cloudflare Workers" ;
+    :hasName "Cloudflare Workers" .
+
+:VercelFunctions rdf:type :ServerlessPlatform ; # Vercel itself is more PaaS/Hosting, but has serverless functions
+    rdfs:label "Vercel Functions" ;
+    :hasName "Vercel Functions" . # Naming distinct from Vercel platform if needed
+
+# --- Specialized Cloud Service Individuals (Typed as :Platform or specific subclasses if applicable, otherwise maybe just :Technology) ---
+# Typing these accurately can be complex. Using :Platform as a general bucket for now.
+
+:AWSCognito rdf:type :Platform ; # Identity Platform
+    rdfs:label "AWS Cognito" ;
+    :hasName "AWS Cognito" .
+
+:Stripe rdf:type :Platform ; # Payments Platform
+    rdfs:label "Stripe" ;
+    :hasName "Stripe" .
+
+:Twilio rdf:type :Platform ; # Communications Platform
+    rdfs:label "Twilio" ;
+    :hasName "Twilio" .
+
+:Algolia rdf:type :Platform ; # Search-as-a-Service Platform
+    rdfs:label "Algolia" ;
+    :hasName "Algolia" .
+
+:Auth0 rdf:type :Platform ; # Identity Platform
+    rdfs:label "Auth0" ;
+    :hasName "Auth0" .
+
+# --- Low-Code/No-Code Platform Individuals ---
+
+:Mendix rdf:type :Platform ; # Specific subclass could be created if needed
+    rdfs:label "Mendix" ;
+    :hasName "Mendix" .
+
+:OutSystems rdf:type :Platform ;
+    rdfs:label "OutSystems" ;
+    :hasName "OutSystems" .
+
+:Bubble rdf:type :Platform ;
+    rdfs:label "Bubble" ;
+    :hasName "Bubble" .
+
+:Zapier rdf:type :Platform ; # Integration Platform as a Service (iPaaS)
+    rdfs:label "Zapier" ;
+    :hasName "Zapier" .
+
+:Airtable rdf:type :Platform ; # Collaborative Platform / Database Hybrid
+    rdfs:label "Airtable" ;
+    :hasName "Airtable" .

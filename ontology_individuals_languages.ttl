@@ -1,0 +1,194 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/individuals/languages>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ;
+    owl:imports <http://example.org/software-architecture-ontology/datatype-properties> ;
+    rdfs:label "Software Architecture Problem Prediction Ontology - Individuals (Programming Languages)" ;
+    rdfs:comment "Defines individuals for various programming languages." .
+
+# --- Programming Language Individuals (Core) ---
+
+:Python rdf:type :ProgrammingLanguage ;
+    rdfs:label "Python" ;
+    :hasName "Python" .
+
+:JavaScript rdf:type :ProgrammingLanguage ;
+    rdfs:label "JavaScript" ;
+    :hasName "JavaScript" .
+
+:TypeScript rdf:type :ProgrammingLanguage ;
+    rdfs:label "TypeScript" ;
+    :hasName "TypeScript" .
+
+:Java rdf:type :ProgrammingLanguage ;
+    rdfs:label "Java" ;
+    :hasName "Java" .
+
+:CPlusPlus rdf:type :ProgrammingLanguage ; # Changed from C++ to CPlusPlus for valid IRI
+    rdfs:label "C++" ;
+    :hasName "C++" .
+
+:CSharp rdf:type :ProgrammingLanguage ; # Changed from C# to CSharp for valid IRI
+    rdfs:label "C#" ;
+    :hasName "C#" .
+
+:GoLang rdf:type :ProgrammingLanguage ; # Changed from Go/Golang to GoLang
+    rdfs:label "Go / Golang" ;
+    :hasName "Go" . # Using primary name
+
+:PHP rdf:type :ProgrammingLanguage ;
+    rdfs:label "PHP" ;
+    :hasName "PHP" .
+
+:Rust rdf:type :ProgrammingLanguage ;
+    rdfs:label "Rust" ;
+    :hasName "Rust" .
+
+:Swift rdf:type :ProgrammingLanguage ;
+    rdfs:label "Swift" ;
+    :hasName "Swift" .
+
+# --- Programming Language Individuals (Secondary) ---
+
+:R rdf:type :ProgrammingLanguage ;
+    rdfs:label "R" ;
+    :hasName "R" .
+
+:Kotlin rdf:type :ProgrammingLanguage ;
+    rdfs:label "Kotlin" ;
+    :hasName "Kotlin" .
+
+:Ruby rdf:type :ProgrammingLanguage ;
+    rdfs:label "Ruby" ;
+    :hasName "Ruby" .
+
+:Scala rdf:type :ProgrammingLanguage ;
+    rdfs:label "Scala" ;
+    :hasName "Scala" .
+
+:Dart rdf:type :ProgrammingLanguage ;
+    rdfs:label "Dart" ;
+    :hasName "Dart" .
+
+# --- Shell/Scripting Languages ---
+
+:ShellBash rdf:type :ProgrammingLanguage ; # Changed from Shell/Bash
+    rdfs:label "Shell / Bash" ;
+    :hasName "Bash" . # Using primary name
+
+:PowerShell rdf:type :ProgrammingLanguage ;
+    rdfs:label "PowerShell" ;
+    :hasName "PowerShell" .
+
+:Perl rdf:type :ProgrammingLanguage ;
+    rdfs:label "Perl" ;
+    :hasName "Perl" .
+
+:Lua rdf:type :ProgrammingLanguage ;
+    rdfs:label "Lua" ;
+    :hasName "Lua" .
+
+:Groovy rdf:type :ProgrammingLanguage ;
+    rdfs:label "Groovy" ;
+    :hasName "Groovy" .
+
+# --- Legacy/Specialized Languages ---
+
+:COBOL rdf:type :ProgrammingLanguage ;
+    rdfs:label "COBOL" ;
+    :hasName "COBOL" .
+
+:Fortran rdf:type :ProgrammingLanguage ;
+    rdfs:label "Fortran" ;
+    :hasName "Fortran" .
+
+:DelphiObjectPascal rdf:type :ProgrammingLanguage ; # Changed from Delphi/Object Pascal
+    rdfs:label "Delphi / Object Pascal" ;
+    :hasName "Delphi" . # Using primary name
+
+:VisualBasic rdf:type :ProgrammingLanguage ;
+    rdfs:label "Visual Basic" ;
+    :hasName "Visual Basic" .
+
+:MATLAB rdf:type :ProgrammingLanguage ;
+    rdfs:label "MATLAB" ;
+    :hasName "MATLAB" .
+
+# --- Functional Programming Languages ---
+
+:Haskell rdf:type :ProgrammingLanguage ;
+    rdfs:label "Haskell" ;
+    :hasName "Haskell" .
+
+:Clojure rdf:type :ProgrammingLanguage ;
+    rdfs:label "Clojure" ;
+    :hasName "Clojure" .
+
+:FSharp rdf:type :ProgrammingLanguage ; # Changed from F#
+    rdfs:label "F#" ;
+    :hasName "F#" .
+
+:Elixir rdf:type :ProgrammingLanguage ;
+    rdfs:label "Elixir" ;
+    :hasName "Elixir" .
+
+:Erlang rdf:type :ProgrammingLanguage ;
+    rdfs:label "Erlang" ;
+    :hasName "Erlang" .
+
+# --- SQL Dialects/Database Languages ---
+
+:SQL rdf:type :ProgrammingLanguage ;
+    rdfs:label "SQL" ;
+    :hasName "SQL" .
+
+:PLSQL rdf:type :ProgrammingLanguage ; # Changed from PL/SQL
+    rdfs:label "PL/SQL" ;
+    :hasName "PL/SQL" .
+
+:TSQL rdf:type :ProgrammingLanguage ; # Changed from T-SQL
+    rdfs:label "T-SQL" ;
+    :hasName "T-SQL" .
+    # Note: MySQL, PostgreSQL, SQLite are defined as :DatabaseTechnology individuals elsewhere.
+
+# --- Scientific/Statistical Languages & Tools ---
+
+:Julia rdf:type :ProgrammingLanguage ;
+    rdfs:label "Julia" ;
+    :hasName "Julia" .
+
+:SAS rdf:type :ProgrammingLanguage ; # SAS is arguably more a system/tool, but often used like a language
+    rdfs:label "SAS" ;
+    :hasName "SAS" .
+
+:SPSS rdf:type :ProgrammingLanguage ; # Similar to SAS
+    rdfs:label "SPSS" ;
+    :hasName "SPSS" .
+    # Note: Jupyter and TensorFlow are defined elsewhere (:DevelopmentTool, :Library).
+
+# --- Emerging/Specialized Languages ---
+
+:WebAssembly rdf:type :ProgrammingLanguage ; # WASM
+    rdfs:label "WebAssembly (WASM)" ;
+    :hasName "WebAssembly" .
+
+:Crystal rdf:type :ProgrammingLanguage ;
+    rdfs:label "Crystal" ;
+    :hasName "Crystal" .
+
+:Zig rdf:type :ProgrammingLanguage ;
+    rdfs:label "Zig" ;
+    :hasName "Zig" .
+
+:Nim rdf:type :ProgrammingLanguage ;
+    rdfs:label "Nim" ;
+    :hasName "Nim" .
+
+:Solidity rdf:type :ProgrammingLanguage ;
+    rdfs:label "Solidity" ;
+    :hasName "Solidity" .

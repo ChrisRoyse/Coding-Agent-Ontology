@@ -1,0 +1,36 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology>
+    rdf:type owl:Ontology ;
+    rdfs:label "Software Architecture Problem Prediction Ontology - Core" ;
+    rdfs:comment "The core module defining top-level abstract classes for the ontology." .
+
+# --- Top-Level Abstract Classes ---
+
+:SoftwareEntity rdf:type owl:Class ;
+    rdfs:label "Software Entity" ;
+    rdfs:comment "The root abstract class for all software-related concepts, including technologies, components, and versions." .
+
+:Problem rdf:type owl:Class ;
+    rdfs:label "Problem" ;
+    rdfs:comment "Represents any potential or actual issue, bug, vulnerability, flaw, or risk within a software system or its dependencies." .
+
+:Solution rdf:type owl:Class ;
+    rdfs:label "Solution" ;
+    rdfs:comment "Represents any fix, workaround, mitigation strategy, or alternative approach to address a Problem." .
+
+:Context rdf:type owl:Class ;
+    rdfs:label "Context" ;
+    rdfs:comment "Represents the environment, conditions, or circumstances under which software entities exist, problems occur, or solutions are applied." .
+
+:DataSource rdf:type owl:Class ;
+    rdfs:label "Data Source" ;
+    rdfs:comment "Represents the origin or source of information regarding problems, solutions, or software entities (e.g., documentation, issue trackers, articles)." .
+
+:ArchitecturalConcept rdf:type owl:Class ;
+    rdfs:label "Architectural Concept" ;
+    rdfs:comment "Represents abstract architectural ideas, including design patterns, anti-patterns, or roles components play within an architecture." .

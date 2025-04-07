@@ -1,0 +1,74 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/individuals/databases>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ;
+    owl:imports <http://example.org/software-architecture-ontology/datatype-properties> ;
+    rdfs:label "Software Architecture Problem Prediction Ontology - Individuals (Databases)" ;
+    rdfs:comment "Defines individuals for various database technologies." .
+
+# --- SQL Database Technology Individuals ---
+
+:PostgreSQL rdf:type :DatabaseTechnology ;
+    rdfs:label "PostgreSQL" ;
+    :hasName "PostgreSQL" ;
+    :databaseModel "Relational" .
+
+:MySQL rdf:type :DatabaseTechnology ;
+    rdfs:label "MySQL" ;
+    :hasName "MySQL" ;
+    :databaseModel "Relational" .
+
+:SQLite rdf:type :DatabaseTechnology ;
+    rdfs:label "SQLite" ;
+    :hasName "SQLite" ;
+    :databaseModel "Relational" .
+
+# Microsoft SQL Server is implicitly covered by Azure SQL DBaaS, but can be added if needed as a distinct tech
+:SQLServer rdf:type :DatabaseTechnology ;
+    rdfs:label "Microsoft SQL Server" ;
+    :hasName "Microsoft SQL Server" ;
+    :databaseModel "Relational" .
+
+# --- NoSQL Database Technology Individuals ---
+
+:Redis rdf:type :DatabaseTechnology ;
+    rdfs:label "Redis" ;
+    :hasName "Redis" ;
+    :databaseModel "Key-Value" . # Also supports other models
+
+:Elasticsearch rdf:type :DatabaseTechnology ;
+    rdfs:label "Elasticsearch" ;
+    :hasName "Elasticsearch" ;
+    :databaseModel "Search Engine / Document" .
+
+:Cassandra rdf:type :DatabaseTechnology ;
+    rdfs:label "Cassandra" ;
+    :hasName "Cassandra" ;
+    :databaseModel "Wide-Column Store" .
+
+:Neo4j rdf:type :DatabaseTechnology ;
+    rdfs:label "Neo4j" ;
+    :hasName "Neo4j" ;
+    :databaseModel "Graph" .
+
+:CouchDB rdf:type :DatabaseTechnology ;
+    rdfs:label "CouchDB" ;
+    :hasName "CouchDB" ;
+    :databaseModel "Document" .
+
+# MongoDB is primarily accessed via Atlas (DBaaS/BaaS), but define the core tech too
+:MongoDB rdf:type :DatabaseTechnology ;
+    rdfs:label "MongoDB" ;
+    :hasName "MongoDB" ;
+    :databaseModel "Document" .
+
+# DynamoDB is primarily accessed via AWS DBaaS, but define the core tech too
+:DynamoDB rdf:type :DatabaseTechnology ;
+    rdfs:label "DynamoDB" ;
+    :hasName "DynamoDB" ;
+    :databaseModel "Key-Value / Document" .

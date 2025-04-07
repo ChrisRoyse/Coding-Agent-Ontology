@@ -1,0 +1,58 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/architecture>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology> ; # Imports ontology_core.ttl
+    rdfs:label "Software Architecture Problem Prediction Ontology - Architecture Concepts" ;
+    rdfs:comment "Defines the hierarchy for architectural concepts like patterns, anti-patterns, and component roles. Imports core definitions." .
+
+# --- Architectural Concept Hierarchy ---
+# Note: The :ArchitecturalConcept class itself is defined in ontology_core.ttl
+
+:ArchitecturalPattern rdf:type owl:Class ;
+    rdfs:subClassOf :ArchitecturalConcept ;
+    rdfs:label "Architectural Pattern" ;
+    rdfs:comment "A general, reusable solution to a commonly occurring problem within a given context in software architecture. Examples: Microservices, Monolith, MVC." .
+    # Specific patterns (e.g., :Microservices) can be defined as individuals or subclasses.
+
+:ArchitecturalAntiPattern rdf:type owl:Class ;
+    rdfs:subClassOf :ArchitecturalConcept ;
+    rdfs:label "Architectural Anti-Pattern" ;
+    rdfs:comment "A common response to a recurring problem that is usually ineffective and risks being counterproductive. Examples: Distributed Monolith, God Object, Spaghetti Code." .
+    # Specific anti-patterns (e.g., :DistributedMonolith) can be defined as individuals or subclasses.
+
+:ComponentRole rdf:type owl:Class ;
+    rdfs:subClassOf :ArchitecturalConcept ;
+    rdfs:label "Component Role" ;
+    rdfs:comment "Defines the specific function or purpose a SoftwareComponent plays within the overall architecture. Examples: API Gateway Role, Database Role, Authentication Service Role." .
+    # Specific roles (e.g., :APIGatewayRole) can be defined as individuals or subclasses.
+
+# --- Example Individuals/Subclasses for Architectural Concepts (can be expanded) ---
+
+:Microservices rdf:type :ArchitecturalPattern ;
+    rdfs:label "Microservices Pattern" ;
+    rdfs:comment "An architectural style that structures an application as a collection of small, autonomous services, modeled around a business domain." .
+
+:Monolith rdf:type :ArchitecturalPattern ;
+    rdfs:label "Monolithic Pattern" ;
+    rdfs:comment "An architectural style where an application is built as a single, unified unit." .
+
+:DistributedMonolith rdf:type :ArchitecturalAntiPattern ;
+    rdfs:label "Distributed Monolith Anti-Pattern" ;
+    rdfs:comment "An anti-pattern where microservices are tightly coupled, negating the benefits of the microservice architecture and introducing the complexities of distributed systems." .
+
+:GodObject rdf:type :ArchitecturalAntiPattern ;
+    rdfs:label "God Object Anti-Pattern" ;
+    rdfs:comment "An anti-pattern where a single class or module knows or does too much, centralizing excessive responsibility." .
+
+:APIGatewayRole rdf:type :ComponentRole ;
+    rdfs:label "API Gateway Role" ;
+    rdfs:comment "The role of a component that acts as a single entry point for a defined group of microservices." .
+
+:DatabaseRole rdf:type :ComponentRole ;
+    rdfs:label "Database Role" ;
+    rdfs:comment "The role of a component responsible for persisting and retrieving application data." .

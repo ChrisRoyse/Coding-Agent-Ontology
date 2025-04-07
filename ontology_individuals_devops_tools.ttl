@@ -1,0 +1,96 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/individuals/devops-tools>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ;
+    owl:imports <http://example.org/software-architecture-ontology/datatype-properties> ;
+    rdfs:label "Software Architecture Problem Prediction Ontology - Individuals (DevOps & Development Tools)" ;
+    rdfs:comment "Defines individuals for various development tools, including CI/CD, containerization, build tools, package managers, etc." .
+
+# --- Developer Tool Ecosystems / CI/CD / Containerization ---
+
+:GitHubActions rdf:type :DevelopmentTool ; # Could also be considered a Platform feature
+    rdfs:label "GitHub Actions" ;
+    :hasName "GitHub Actions" .
+
+:GitLabCI rdf:type :DevelopmentTool ; # Changed from GitLab CI/CD
+    rdfs:label "GitLab CI/CD" ;
+    :hasName "GitLab CI/CD" .
+
+:Jenkins rdf:type :DevelopmentTool ;
+    rdfs:label "Jenkins" ;
+    :hasName "Jenkins" .
+
+:Docker rdf:type :DevelopmentTool ; # Containerization Tool/Platform
+    rdfs:label "Docker" ;
+    :hasName "Docker" .
+
+:Kubernetes rdf:type :DevelopmentTool ; # Container Orchestration Platform
+    rdfs:label "Kubernetes" ;
+    :hasName "Kubernetes" .
+
+:Terraform rdf:type :DevelopmentTool ; # Infrastructure as Code
+    rdfs:label "Terraform" ;
+    :hasName "Terraform" .
+
+# --- Build Tools ---
+
+:Maven rdf:type :DevelopmentTool ;
+    rdfs:label "Maven" ;
+    :hasName "Maven" .
+
+:Gradle rdf:type :DevelopmentTool ;
+    rdfs:label "Gradle" ;
+    :hasName "Gradle" .
+
+:Webpack rdf:type :DevelopmentTool ;
+    rdfs:label "Webpack" ;
+    :hasName "Webpack" .
+
+:Vite rdf:type :DevelopmentTool ;
+    rdfs:label "Vite" ;
+    :hasName "Vite" .
+
+:Make rdf:type :DevelopmentTool ;
+    rdfs:label "Make" ;
+    :hasName "Make" .
+
+:Ant rdf:type :DevelopmentTool ;
+    rdfs:label "Ant" ;
+    :hasName "Ant" .
+
+# --- Package Managers ---
+
+:NPM rdf:type :DevelopmentTool ;
+    rdfs:label "NPM (Node Package Manager)" ;
+    :hasName "npm" .
+
+:Yarn rdf:type :DevelopmentTool ;
+    rdfs:label "Yarn" ;
+    :hasName "Yarn" .
+
+:Pip rdf:type :DevelopmentTool ;
+    rdfs:label "Pip (Pip Installs Packages)" ;
+    :hasName "pip" .
+
+# --- Other Development Tools ---
+
+:Postman rdf:type :DevelopmentTool ; # API Testing/Development Tool
+    rdfs:label "Postman" ;
+    :hasName "Postman" .
+
+:Jupyter rdf:type :DevelopmentTool ; # Interactive Computing Environment
+    rdfs:label "Jupyter" ;
+    :hasName "Jupyter" . # Includes Jupyter Notebook, Lab, etc.
+
+:Deno rdf:type :DevelopmentTool ; # Runtime for JS/TS, alternative to Node.js
+    rdfs:label "Deno" ;
+    :hasName "Deno" .
+
+:GraphQL rdf:type :DevelopmentTool ; # Query Language & Runtime for APIs - fits best as a tool/tech here
+    rdfs:label "GraphQL" ;
+    :hasName "GraphQL" .

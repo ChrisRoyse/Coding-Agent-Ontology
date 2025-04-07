@@ -1,0 +1,53 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/solutions>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology> ; # Imports ontology_core.ttl
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ; # Imports ontology_technologies.ttl for :TechnologyVersion and :Technology
+    rdfs:label "Software Architecture Problem Prediction Ontology - Solutions" ;
+    rdfs:comment "Defines the hierarchy of potential solutions, fixes, and workarounds for software problems. Imports core and technology definitions." .
+
+# --- Solution Hierarchy ---
+# Note: The :Solution class itself is defined in ontology_core.ttl
+# Properties like solutionTitle, complexity, etc., are defined in ontology_properties.ttl
+
+:ConfigurationChange rdf:type owl:Class ;
+    rdfs:subClassOf :Solution ;
+    rdfs:label "Configuration Change" ;
+    rdfs:comment "A solution that involves modifying configuration files, environment variables, or settings." .
+
+:CodePatch rdf:type owl:Class ;
+    rdfs:subClassOf :Solution ;
+    rdfs:label "Code Patch" ;
+    rdfs:comment "A solution involving direct modification of the source code to fix a problem." .
+
+:VersionUpdate rdf:type owl:Class ;
+    rdfs:subClassOf :Solution ;
+    rdfs:label "Version Update" ;
+    rdfs:comment "A solution that involves updating a technology or dependency to a different version, typically a newer one, to resolve an issue." .
+    # Properties: targetVersion (:TechnologyVersion) defined in ontology_properties.ttl
+
+:DependencyOverride rdf:type owl:Class ;
+    rdfs:subClassOf :Solution ;
+    rdfs:label "Dependency Override" ;
+    rdfs:comment "A solution, often specific to package managers, where the dependency resolution mechanism is forced to use a specific version of a transitive dependency, potentially overriding other constraints." .
+
+:UseAlternative rdf:type owl:Class ;
+    rdfs:subClassOf :Solution ;
+    rdfs:label "Use Alternative" ;
+    rdfs:comment "A solution that involves replacing a problematic technology or component with a different one that provides similar functionality." .
+    # Properties: suggestedAlternative (:Technology) defined in ontology_properties.ttl
+
+:ArchitecturalRefactoring rdf:type owl:Class ;
+    rdfs:subClassOf :Solution ;
+    rdfs:label "Architectural Refactoring" ;
+    rdfs:comment "A solution involving significant changes to the software's structure or design patterns to address underlying architectural issues." .
+
+:Workaround rdf:type owl:Class ;
+    rdfs:subClassOf :Solution ;
+    rdfs:label "Workaround" ;
+    rdfs:comment "A temporary or partial solution that mitigates the impact of a problem without fully resolving the root cause." .

@@ -1,0 +1,100 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/individuals/frameworks-libs-misc>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology/technologies> ;
+    owl:imports <http://example.org/software-architecture-ontology/datatype-properties> ;
+    rdfs:label "Software Architecture Problem Prediction Ontology - Individuals (Frameworks, Libraries, OS, Browsers)" ;
+    rdfs:comment "Defines individuals for various frameworks, libraries, operating systems, and browsers." .
+
+# --- Framework Individuals ---
+
+:React rdf:type :Framework ; # Often called a library, but functions like a framework
+    rdfs:label "React" ;
+    :hasName "React" .
+
+:Angular rdf:type :Framework ;
+    rdfs:label "Angular" ;
+    :hasName "Angular" .
+
+:Vue rdf:type :Framework ; # Changed from Vue.js
+    rdfs:label "Vue.js" ;
+    :hasName "Vue.js" .
+
+:SpringBoot rdf:type :Framework ;
+    rdfs:label "Spring Boot" ;
+    :hasName "Spring Boot" .
+
+:Django rdf:type :Framework ;
+    rdfs:label "Django" ;
+    :hasName "Django" .
+
+:Rails rdf:type :Framework ; # Ruby on Rails
+    rdfs:label "Ruby on Rails" ;
+    :hasName "Ruby on Rails" .
+
+:Express rdf:type :Framework ; # Changed from Express.js
+    rdfs:label "Express.js" ;
+    :hasName "Express.js" .
+
+:NextJs rdf:type :Framework ; # Changed from Next.js
+    rdfs:label "Next.js" ;
+    :hasName "Next.js" .
+
+:Svelte rdf:type :Framework ; # Compiler, but acts like a framework
+    rdfs:label "Svelte" ;
+    :hasName "Svelte" .
+
+:Remix rdf:type :Framework ;
+    rdfs:label "Remix" ;
+    :hasName "Remix" .
+
+# --- Library Individuals ---
+
+:Redux rdf:type :Library ;
+    rdfs:label "Redux" ;
+    :hasName "Redux" .
+
+:jQuery rdf:type :Library ;
+    rdfs:label "jQuery" ;
+    :hasName "jQuery" .
+
+:Pandas rdf:type :Library ;
+    rdfs:label "Pandas" ;
+    :hasName "Pandas" .
+
+:TensorFlow rdf:type :Library ; # Machine Learning Library
+    rdfs:label "TensorFlow" ;
+    :hasName "TensorFlow" .
+
+# --- Operating System Individuals ---
+
+:Linux rdf:type :OperatingSystem ;
+    rdfs:label "Linux" ;
+    :hasName "Linux" . # Represents the kernel/family; specific distributions (Ubuntu, CentOS) could be subclasses/individuals if needed
+
+:Windows rdf:type :OperatingSystem ;
+    rdfs:label "Microsoft Windows" ;
+    :hasName "Windows" .
+
+:MacOS rdf:type :OperatingSystem ; # Changed from MacOS
+    rdfs:label "macOS" ;
+    :hasName "macOS" .
+
+# --- Browser Individuals ---
+
+:Chrome rdf:type :Browser ; # Google Chrome
+    rdfs:label "Google Chrome" ;
+    :hasName "Chrome" .
+
+:Firefox rdf:type :Browser ; # Mozilla Firefox
+    rdfs:label "Mozilla Firefox" ;
+    :hasName "Firefox" .
+
+:Safari rdf:type :Browser ; # Apple Safari
+    rdfs:label "Apple Safari" ;
+    :hasName "Safari" .

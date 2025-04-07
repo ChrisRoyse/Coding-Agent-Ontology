@@ -1,0 +1,47 @@
+@prefix : <http://example.org/software-architecture-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/software-architecture-ontology/datasources>
+    rdf:type owl:Ontology ;
+    owl:imports <http://example.org/software-architecture-ontology> ; # Imports ontology_core.ttl
+    rdfs:label "Software Architecture Problem Prediction Ontology - Data Sources" ;
+    rdfs:comment "Defines the hierarchy for different sources of information used in the knowledge graph. Imports core definitions." .
+
+# --- DataSource Hierarchy ---
+# Note: The :DataSource class itself is defined in ontology_core.ttl
+# Properties like sourceURI, retrievedDate, sourceCredibility are defined in ontology_properties.ttl
+
+:StackOverflowPost rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource ;
+    rdfs:label "Stack Overflow Post" ;
+    rdfs:comment "Represents a question or answer from Stack Overflow as a data source." .
+    # Properties: questionId (xsd:integer), answerId (xsd:integer), score (xsd:integer), isAcceptedAnswer (xsd:boolean) defined in ontology_properties.ttl
+
+:GitHubIssue rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource ;
+    rdfs:label "GitHub Issue" ;
+    rdfs:comment "Represents an issue report from a GitHub repository as a data source." .
+    # Properties: repositoryURL (xsd:anyURI), issueNumber (xsd:integer), issueState (xsd:string) defined in ontology_properties.ttl
+
+:OfficialDocumentation rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource ;
+    rdfs:label "Official Documentation" ;
+    rdfs:comment "Represents documentation provided by the official vendor or maintainer of a technology." .
+
+:BlogArticle rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource ;
+    rdfs:label "Blog Article" ;
+    rdfs:comment "Represents a blog post or article discussing a relevant topic, problem, or solution." .
+
+:UserReport rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource ;
+    rdfs:label "User Report" ;
+    rdfs:comment "Represents a problem report or feedback submitted directly by a user, potentially through channels other than public issue trackers." .
+
+:SecurityAdvisory rdf:type owl:Class ;
+    rdfs:subClassOf :DataSource ;
+    rdfs:label "Security Advisory" ;
+    rdfs:comment "Represents an official notification about a security vulnerability, often from sources like CVE databases or vendor security bulletins." .
